@@ -18,7 +18,7 @@ gcloud compute instances create ${NAME} \
     --metadata startup-script='#!/bin/bash 
         # Check for CUDA and try to install.
         # Determine whether or not we are first-time logging in by existence of CUDA
-        if ! dpkg-query -W cuda-10-0; then
+        if ! dpkg-query -W cuda; then
           # Disable ssh
           service ssh stop
 
