@@ -106,3 +106,10 @@ class: middle, center
 
 # What is the technology behind GPU processors?
 
+---
+class: middle, center
+
+It’s started with 3D graphics
+
+![:width 80%](rt.jpg)
+
