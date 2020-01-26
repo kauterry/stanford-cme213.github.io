@@ -22,12 +22,12 @@ gcloud compute instances create ${NAME} \
           # Disable ssh
           service ssh stop
 
-          # Install openmpi
           apt-get update
+
+          # Install openmpi
           apt-get install openmpi-bin openmpi-common libopenmpi-dev -y
 
           # Install make and gcc
-          apt-get update
           apt-get install make gcc g++ -y
 
           # Install ruby and rmate
