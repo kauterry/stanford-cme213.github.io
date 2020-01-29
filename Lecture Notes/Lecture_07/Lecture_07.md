@@ -14,7 +14,7 @@ class: middle, center
 
 Before we start...
 
-Download from `Code/`
+Download from [Code/](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code)
 
 [Code/create_vm_gpu1.sh](https://github.com/stanford-cme213/stanford-cme213.github.io/blob/master/Code/create_vm_gpu1.sh)
 
