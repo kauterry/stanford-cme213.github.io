@@ -11,22 +11,18 @@ This class will give hands-on experience with programming multicore processors, 
 * [Lecture 1](Lecture Notes/Lecture_01/Lecture_01.html)
 * [Lecture 2](Lecture Notes/Lecture_02/Lecture_02.html)
 * [C++ Refresher](Tutorial Notes/Tutorial_01.pdf) and [code](Tutorial Notes/code.zip)
-* [Lecture 3](Lecture Notes/Lecture_03/Lecture_03.html)
-* [Lecture 3 code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_03)
-* [Lecture 4](Lecture Notes/Lecture_04/Lecture_04.html)
-* [Lecture 4 code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_04)
+* [Lecture 3](Lecture Notes/Lecture_03/Lecture_03.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_03)
+* [Lecture 4](Lecture Notes/Lecture_04/Lecture_04.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_04)
+* [Lecture 5](Lecture Notes/Lecture_05/Lecture_05.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_05)
+* [Lecture 6](Lecture Notes/Lecture_06/Lecture_06.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_06)
 
 ### Videos
 * [Lecture 1](https://youtu.be/mmJ__Ygexos)
 * [Lecture 2](https://youtu.be/ETOp2NkZrlo)
 * [Lecture 3](https://youtu.be/Mi1vwbsk6Fw)
-
-### Class Information
-* Location: [School of Education, Room 128](https://campus-map.stanford.edu/?srch=School+of+Education+128)  
-* Lectures: Mon/Wed/Fri 1:30-2:50PM
-* Instructor: [Eric Darve](https://me.stanford.edu/people/eric-darve)  
-* Course Assistants: William Jen, Kingway Liang
-* [Syllabus](https://canvas.stanford.edu/courses/110850/assignments/syllabus)
+* [Lecture 4](https://youtu.be/wN0JRtCp7YY)
+* [Lecture 5](https://youtu.be/Oip9nrDzAAQ)
+* [Lecture 6](https://youtu.be/O8v4JXwDGws)
 
 ### Office Hours
 * Wednesday 7-9PM; TA led; Huang 304
@@ -43,13 +39,28 @@ This class will give hands-on experience with programming multicore processors, 
 * [Billing page](https://console.cloud.google.com/billing)
 * [GCP dashboard](https://console.cloud.google.com/home)
 
+### Class Information
+* Location: [School of Education, Room 128](https://campus-map.stanford.edu/?srch=School+of+Education+128)  
+* Lectures: Mon/Wed/Fri 1:30-2:50PM
+* Instructor: [Eric Darve](https://me.stanford.edu/people/eric-darve)  
+* Course Assistants: William Jen, Kingway Liang
+* [Syllabus](https://canvas.stanford.edu/courses/110850/assignments/syllabus)
+
 ### Reading and links
+
+#### OpenMP
+* [OpenMP LLNL guide](https://computing.llnl.gov/tutorials/openMP/)
+* [OpenMP guide by Yliluoma](https://bisqwit.iki.fi/story/howto/openmp/)
+* [OpenMP 5.0 Reference Guide](https://www.openmp.org/wp-content/uploads/OpenMPRef-5.0-0519-web.pdf)
+* [OpenMP API Specification](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5.0.pdf)
+
+#### C++ threads
 * [C++ reference](https://en.cppreference.com/w/cpp)
 * [Simple examples of C++ multithreading](https://www.geeksforgeeks.org/multithreading-in-cpp/)
 * [C++ threads](https://en.cppreference.com/w/cpp/thread/thread/thread)
 * [LLNL tutorial on Pthreads](https://computing.llnl.gov/tutorials/pthreads/)
-* [OpenMP 5.0 Reference Guide](https://www.openmp.org/wp-content/uploads/OpenMPRef-5.0-0519-web.pdf)
-* [OpenMP API Specification](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5.0.pdf)
+
+#### CUDA
 * [CUDA Programming Guides and References](http://docs.nvidia.com/cuda/index.html)
 * [CUDA C++ Programming Guide](http://docs.nvidia.com/cuda/pdf/CUDA_C_Programming_Guide.pdf)
 * [CUDA C++ Best Practices Guide](http://docs.nvidia.com/cuda/pdf/CUDA_C_Best_Practices_Guide.pdf)
@@ -64,5 +75,7 @@ This class will give hands-on experience with programming multicore processors, 
 * [Data sheet for Tesla GPUs](https://en.wikipedia.org/wiki/Nvidia_Tesla). **Tesla** is NVIDIA's brand name for their products targeting stream processing or general-purpose graphics processing units (GPGPU).
 * [K80 device info](k80.md)
 * [K80 data sheet](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/TeslaK80-datasheet.pdf)
+
+#### Sorting algorithms
 * [A novel sorting algorithm for many-core architectures based on adaptive bitonic sort](https://ieeexplore.ieee.org/abstract/document/6267838)
 * [Adaptive Bitonic Sorting](https://pdfs.semanticscholar.org/bcdf/c4e40c79547c9daf89dada4e1c23056871cb.pdf)

@@ -10,6 +10,8 @@ description: Guides to setup Google Cloud Platform (GCP) for course homework and
 
 [Billing page](https://console.cloud.google.com/billing)
 
+`gcloud compute instances start NAME`
+
 `gcloud compute ssh NAME`
 
 `gcloud compute scp LOCAL_PATH NAME:VM_PATH`
@@ -17,6 +19,8 @@ description: Guides to setup Google Cloud Platform (GCP) for course homework and
 `gcloud compute scp NAME:VM_PATH LOCAL_PATH`
 
 `gcloud compute scp --recurse` to copy directories
+
+`gcloud compute instances stop NAME`
 
 For remote editing with VS Code:
 
