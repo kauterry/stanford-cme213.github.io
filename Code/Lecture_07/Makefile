@@ -1,5 +1,5 @@
 CXX=nvcc
-CXXFLAGS=-Icuda_helper -O3 --compiler-options -Wall -arch=sm_35
+CXXFLAGS=-Icuda_helper -O3 --compiler-options -Wall -arch=sm_37
 
 SRC := $(wildcard *.cpp) $(wildcard *.cu)
 EXE := $(patsubst %.cpp,%,$(filter %.cpp,$(SRC))) $(patsubst %.cu,%,$(filter %.cu,$(SRC)))

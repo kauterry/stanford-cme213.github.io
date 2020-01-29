@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cassert>
-#include "utils.h"
+#include <utils.h>
 
 using std::vector;
 
@@ -17,12 +17,13 @@ void kernel(int* out) {
     out[threadIdx.x] = f(threadIdx.x);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
     int N = 32;
 
-    if(argc == 2) {
-        N = atoi(argv[1]);
-    }
+    if (checkCmdLineFlag(argc, (const char **)argv, "N")) {
+        N = getCmdLineArgumentInt(argc, argv, "N");
+        printf("Using %d threads = %d warps\n",N, (N+31)/32);   
+    }     
 
     int* d_output;
 
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
 
     for(int i = 0; i < N; ++i) {
         if (i==0 || i==N-1 || i%(N/10) == 0)
-		printf("Entry %3d, written by thread %2d\n", h_output[i], i);
+		printf("Entry %10d, written by thread %5d\n", h_output[i], i);
         assert(h_output[i] == f(i));
     }
 
@@ -66,17 +67,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-#if 0
-int* d_output;
-cudaMalloc(&d_output, sizeof(int) * N);
-kernel<<<1, N>>>(d_output);
-vector<int> h_output(N);
-cudaMemcpy(&h_output[0], d_output, sizeof(int) * N,
-           cudaMemcpyDeviceToHost);
-for(int i = 0; i < N; ++i) {
-   printf("Entry %3d, written by thread %2d\n",
-          h_output[i], i);
-}
-cudaFree(d_output);
-#endif
