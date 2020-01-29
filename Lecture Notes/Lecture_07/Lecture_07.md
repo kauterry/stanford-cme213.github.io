@@ -398,7 +398,7 @@ class: middle
 ---
 class: middle
 
-Copy the file `Lecture_07.zip` to `gpu1`
+Copy the file [Lecture_07.zip](https://github.com/stanford-cme213/stanford-cme213.github.io/blob/master/Code/Lecture_07.zip) to `gpu1`
 
 On your VM:
 
