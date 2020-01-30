@@ -62,6 +62,10 @@ You need two types of quotas for this the course:
 * `GPUs (all regions)`
 * `NVIDIA K80 GPUs` at location `us-west1` and you need at least **4** for both of them.
 
+If you do not see these quotas, you may need to enable the Compute Engine API. To do this, find "APIs & Services" and
+go to Library. In the search bar, search for "Compute Engine API", and click Enable. Wait for the operation to complete,
+and you should see the `GPUs (all regions)` and `NVIDIA K80 GPUs` quotas popup.
+
 There are ~ 770 different quotas to choose from. To help you find the correct ones, click on Metric from the [quota page](https://console.cloud.google.com/iam-admin/quotas):
 
 ![](gcp/metric.png)
