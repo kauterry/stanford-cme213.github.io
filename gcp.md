@@ -76,6 +76,10 @@ You should get this:
 
 ![quota](/gcp/quota.png)
 
+However, if you do not see these quotas, you may need to enable the Compute Engine API. To do this, find "APIs & Services" and
+go to Library. In the search bar, search for "Compute Engine API", and click Enable. Wait for the operation to complete,
+and you should see the `GPUs (all regions)` and `NVIDIA K80 GPUs` quotas popup.
+
 Click `EDIT QUOTAS` button on top of the page. Fill the quota request form to request at least 4 quotas for both items.
 
 You will not be charged for requesting quotas. It can take up to 48 hours to process your request, so we suggest requesting your quotas as early as possible.
