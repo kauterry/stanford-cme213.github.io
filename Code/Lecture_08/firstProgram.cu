@@ -20,7 +20,7 @@ void kernel(int* out) {
 int main(int argc, const char** argv) {
     int N = 32;
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "N")) {
+    if (checkCmdLineFlag(argc, argv, "N")) {
         N = getCmdLineArgumentInt(argc, argv, "N");
         printf("Using %d threads = %d warps\n",N, (N+31)/32);   
     }     
