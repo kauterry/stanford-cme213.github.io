@@ -6,8 +6,8 @@ class: center, middle
 
 ![:width 40%](Stanford.jpg)
 
-“If debugging is the process of removing bugs, then programming must be the process of putting them in.”
-(Edsger W. Dijkstra)
+“There are two ways to write error-free programs; only the third one works.”
+(Alan J. Perlis)
 
 ---
 class: center, middle
@@ -220,3 +220,470 @@ CUDA error at firstProgram.cu:48 code=9(cudaErrorInvalidConfiguration)
 ```
 
 !!!
+
+---
+class: center, middle
+
+Let's consult the K80 data sheet
+
+[K80](https://stanford-cme213.github.io/k80.html)
+
+---
+class: center, middle
+
+```
+kernel<<<1, N>>>(d_output);
+```
+
+What we need is
+
+```
+kernel<<<num_blocks, block_size>>>(d_output);
+```
+
+---
+class: center, middle
+
+```
+kernel<<<num_blocks, block_size>>>(d_output);
+```
+
+`block_size` can be at most 1,024
+
+Use more blocks!
+
+---
+class: middle
+
+Calculation should be organized into:
+
+- blocks that fit on each SM (limited number of threads)
+- several blocks forming a grid (so that an "unlimited" number of threads can be used)
+
+---
+class: center, middle
+
+![:width 60%](2020-01-30-15-42-32.png)
+
+---
+class: middle
+
+# Defining dimensions
+
+```
+dim3 threadsPerBlock(Nx);
+dim3 numBlocks(Mx);
+
+dim3 threadsPerBlock(Nx, Ny);
+dim3 numBlocks(Mx, My);
+
+dim3 threadsPerBlock(Nx, Ny, Nz);
+dim3 numBlocks(Mx, My, Mz);
+```
+
+---
+class: center, middle
+
+Let's use this to write a program to add two matrices
+
+---
+class: center, middle
+
+![:width 70%](2020-01-31-09-19-46.png)
+
+---
+class: middle
+
+```
+dim3 threads_per_block(2, n_thread);
+
+int blocks_per_grid_x = (n + 2 - 1) / 2;
+int blocks_per_grid_y = (n + n_thread - 1) / n_thread;
+
+dim3 num_blocks(blocks_per_grid_x, blocks_per_grid_y);
+
+Add<<<num_blocks, threads_per_block>>>(n, d_a, d_b, d_c);
+```
+
+---
+class: center, middle
+
+Math formula for number of blocks
+
+`num_blocks = `</br>
+`(num_threads_total + num_thread_per_block - 1)`</br>
+`/ num_thread_per_block`
+
+Try out with</br>
+`num_threads_total = 5`</br>
+`num_thread_per_block = 4`
+
+---
+class: middle
+
+```
+__global__
+void Add(int n, int* a, int* b, int* c) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    int j = blockIdx.y * blockDim.y + threadIdx.y;
+    if(i < n && j < n) {
+        c[n*i + j] = a[n*i + j] + b[n*i + j];
+    }
+}
+```
+
+---
+class: middle
+
+Built-in variable | Description
+--- | ---
+threadIdx | thread index in block
+blockDim | number of threads in a block 
+blockIdx | block index in grid
+gridDim | number of blocks in grid
+warpSize | number of threads in a warp
+
+---
+class: center, middle
+
+STL `vector` cannot be used with CUDA
+
+CUDA has its own mechanism to allocate and manage memory
+
+See [Thrust](https://docs.nvidia.com/cuda/thrust/index.html) for an STL like vector implementation in CUDA
+
+---
+class: center, middle
+
+# Compiling CUDA code
+
+---
+class: center, middle
+
+![:width 55%](cuda-compilation-from-cu-to-executable.png)
+
+---
+class: center, middle
+
+Most CPUs offer binary code compatibility and rely on a published instruction set architecture.
+
+A given compiled code can run on many different processors.
+
+---
+class: center, middle
+
+The situation is different with GPUs.
+
+GPU improvements mean that binaries for different processors are incompatible.
+
+---
+class: middle
+
+Compilation happens in two stages:
+
+1. Code for virtual architecture is generated; PTX
+2. Code for real architecture is generated
+
+PTX assembly code relies on a specific set of features or GPU capabilities
+
+Real architecture: binary code that can be executed on a given GPU
+
+---
+class: center, middle
+
+![:width 40%](virtual-architectures.png)
+
+---
+class: middle
+
+When compiling:
+
+- one virtual architecture is chosen
+- some (or none) real architectures are specified
+
+---
+class: center, middle
+
+If a real architecture is compiled and matches the GPU, the binary is loaded and runs!
+
+If a real architecture for the GPU is missing, a matching GPU binary code is generated when the application is launched using the PTX code.
+
+This is called `just-in-time` compilation.
+
+---
+class: center, middle
+
+Virtual architecture names start with `compute_`
+
+Real architecture names start with `sm_`
+
+---
+class: center, middle
+
+Example
+
+`nvcc a.cu --gpu-architecture=compute_50 --gpu-code=sm_50,sm_52`
+
+Generate code for two GPUs: `sm_50`, `sm_52`
+
+---
+class: center, middle
+
+On GCP, try
+
+`--gpu-architecture=compute_50 --gpu-code=sm_50`
+
+---
+class: center, middle
+
+`--gpu-architecture=compute_50 --gpu-code=sm_50`
+
+Fails because our GPU is `sm_37`
+
+---
+class: center, middle
+
+Try
+
+`--gpu-architecture=compute_50 --gpu-code=sm_37`
+
+---
+class: center, middle
+
+`--gpu-architecture=compute_50 --gpu-code=sm_37`
+
+Fails because `sm_37` does not support `compute_50` features
+
+---
+class: center, middle
+
+Try
+
+`--gpu-architecture=compute_37 --gpu-code=sm_50`
+
+---
+class: center, middle
+
+Fails because wrong `sm`
+
+---
+class: center, middle
+
+Try
+
+`--gpu-architecture=compute_37 --gpu-code=compute_37,sm_50`
+
+---
+class: center, middle
+
+Succeeds
+
+Why?
+
+---
+class: center, middle
+
+Wrong `sm_50`; but PTX for `compute_37` is loaded
+
+Can be JIT compiled for `sm_37`
+
+Win!
+
+---
+class: center, middle
+
+`--gpu-architecture=compute_37 --gpu-code=sm_37`
+
+Compile just for our GPU
+
+---
+class: center, middle
+
+`--gpu-architecture arch (-arch)` 
+
+shorthand
+
+---
+class: center, middle
+
+`--gpu-architecture=sm_37`
+
+is equivalent to
+
+`--gpu-architecture=compute_37 --gpu-code=sm_37,compute_37`
+
+Generate binary for `sm_37` + PTX for JITs on GPUs that support `compute_37`
+
+---
+class: center, middle
+
+`--gpu-architecture=compute_37`
+
+is equivalent to
+
+`--gpu-architecture=compute_37 --gpu-code=compute_37`
+
+Only generate and embed PTX; JIT required for all GPUs
+
+---
+class: center, middle
+
+Recommended 
+
+`--gpu-architecture=compute_37 --gpu-code=sm_37`
+
+Shorter option (which embeds the PTX with the binary)
+
+`-arch=sm_37`
+
+---
+class: center, middle
+
+[List of virtual architectures](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#virtual-architecture-feature-list)
+
+[List of real architectures](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#gpu-feature-list)
+
+---
+class: center, middle
+
+Compiler options | Description
+--- | ---
+-g | Debug on the host
+-G | Debug on the device (CUDA-gdb, Nsight Eclipse Edition)
+-pg | Profiling info for use with gprof (Linux)
+-Xcompiler | Options for underlying gcc compiler
+-O | Optimization level
+
+---
+class: center, middle
+
+[Visual Profiler](https://docs.nvidia.com/cuda/profiler-users-guide/index.html)
+
+![:width 60%](timeline-view.png)
+
+---
+class: center, middle
+
+[CUDA-MEMCHECK](https://docs.nvidia.com/cuda/cuda-memcheck/index.html)
+
+Tool | Description
+--- | ---
+memcheck | Memory access error and leak detection
+racecheck | Shared memory data access hazard detection
+initcheck | Unitialized device global memory access detection
+synccheck | Thread synchronization hazard detection
+
+---
+class: center, middle
+
+GPU Optimization
+
+![:width 30%](2020-01-31-11-33-07.png)
+
+---
+class: center, middle
+
+Optimize data transfer from GPU memory
+
+---
+class: middle
+
+- Caches are used to optimize memory accesses: L1 and L2 caches.
+- Cache behavior is complicated and depends on the compute capability of the GPU.
+- We will focus on `sm_37`
+
+---
+class: center, middle
+
+# L1 cache
+
+Used primarily for local memory, including temporary register spills
+
+---
+class: center, middle
+
+# L2 cache
+
+Cache accesses to local and global memory
+
+---
+class: center, middle
+
+The smallest size for a memory transaction is 32 bytes.
+
+That's 8 floats!
+
+---
+class: middle
+
+Let's make this concrete with a code
+
+```
+  int xid = blockIdx.x * blockDim.x + threadIdx.x;
+  if (xid < n)
+      odata[xid] = idata[xid];
+```
+
+---
+class: center, middle
+
+Warp requests several memory addresses
+
+These are translated into cache line requests (with a granularity of 32 bytes)
+
+Memory requests are serviced 
+
+---
+class: center, middle
+
+![:width 60%](examples-of-global-memory-accesses.png)
+
+---
+class: middle
+
+Benchmark: offset access
+
+```
+int xid = blockIdx.x * blockDim.x + threadIdx.x + offset;
+if (xid < n)
+    odata[xid] = idata[xid];
+```
+
+---
+class: middle
+
+```
+Elapsed time for offset   0 in msec:     4.5359
+Elapsed time for offset   1 in msec:     6.8373
+Elapsed time for offset   2 in msec:     6.8377
+Elapsed time for offset  32 in msec:     4.5360
+Elapsed time for offset  64 in msec:     4.5384
+Elapsed time for offset 128 in msec:     4.5398
+```
+
+---
+class: middle
+
+Benchmark: strided access
+
+```
+int xid = stride * (blockIdx.x * blockDim.x + threadIdx.x);
+if (xid < n)    
+    odata[xid] = idata[xid];
+```
+
+---
+class: middle
+
+```
+Elapsed time for stride   1 in msec:     1.9950
+Elapsed time for stride   2 in msec:     2.7842
+Elapsed time for stride   4 in msec:     4.0088
+Elapsed time for stride   8 in msec:     6.5526
+Elapsed time for stride  16 in msec:     7.4371
+```
+
+---
+class: center, middle
+
+![:width 100%](2020-01-31-13-05-06.png)
