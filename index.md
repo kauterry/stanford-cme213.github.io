@@ -35,6 +35,7 @@ This class will give hands-on experience with programming multicore processors, 
 ### Homework
 * [Homework 1](Homework/hw1.pdf) and [starter code](Homework/code_hw1.zip)
 * [Homework 2](Homework/hw2.pdf) and [Radix Sort Tutorial](Homework/RadixSortTutorial.pdf) and [starter code](Homework/code_hw2.zip)
+* [Homework 3](Homework/hw3.pdf) and [starter code](Homework/code_hw3.zip)
 
 ### Google Cloud Platform 
 * [Google Cloud Platform setup instructions](./gcp.html)
