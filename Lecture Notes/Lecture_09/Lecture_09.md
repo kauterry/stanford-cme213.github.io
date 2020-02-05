@@ -315,7 +315,7 @@ class: middle
 const int warp_id  = threadIdx.y;
 const int lane     = threadIdx.x;
 
-__shared__ int block[warp_size][warp_size+1];
+__shared__ int block[warp_size][warp_size];
 ```  
 
 `lane`: id of thread inside warp
