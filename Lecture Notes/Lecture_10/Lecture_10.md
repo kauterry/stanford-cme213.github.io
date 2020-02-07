@@ -136,7 +136,7 @@ class: center, middle
 
 # Branching and divergent execution path
 
-32 threads = warps
+32 threads = 1 warp
 
 SIMT: Single Instruction, Multiple Thread
 
