@@ -26,10 +26,19 @@ How do you organize the logistics of the transport?
 ![:width 30%](2020-02-05-13-14-35.png)
 
 ---
-class: center, middle
+class: middle
 
 Concurrency is used to hide long latencies:
 
 - memory access
 - floating point units
 - any long sequence of operations
+
+---
+class: center, middle
+
+Processors are optimized in the same way
+
+Hide latency through concurrency
+
+![:width 50%](warp_scheduler.png)
