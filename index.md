@@ -17,6 +17,8 @@ This class will give hands-on experience with programming multicore processors, 
 * [Lecture 6](Lecture Notes/Lecture_06/Lecture_06.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_06)
 * [Lecture 7](Lecture Notes/Lecture_07/Lecture_07.html)
 * [Lecture 8](Lecture Notes/Lecture_08/Lecture_08.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_08)
+* [Lecture 9](Lecture Notes/Lecture_09/Lecture_09.html) and [code](https://github.com/stanford-cme213/stanford-cme213.github.io/tree/master/Code/Lecture_09)
+* [Lecture 10](Lecture Notes/Lecture_10/Lecture_10.html)
 
 ### Videos
 * [Lecture 1](https://youtu.be/mmJ__Ygexos)
@@ -26,6 +28,9 @@ This class will give hands-on experience with programming multicore processors, 
 * [Lecture 5](https://youtu.be/Oip9nrDzAAQ)
 * [Lecture 6](https://youtu.be/O8v4JXwDGws)
 * [Lecture 7](https://youtu.be/nBiQm4NfXLY)
+* [Lecture 8](https://youtu.be/w0cRSZVZ0Pg)
+* [Lecture 9](https://youtu.be/dJNiHydmVjY)
+* [Lecture 10](https://youtu.be/jw-Cx3F0r0E)
 
 ### Office Hours
 * Wednesday 7-9PM; TA led; Huang 304
@@ -36,6 +41,7 @@ This class will give hands-on experience with programming multicore processors, 
 * [Homework 1](Homework/hw1.pdf) and [starter code](Homework/code_hw1.zip)
 * [Homework 2](Homework/hw2.pdf) and [Radix Sort Tutorial](Homework/RadixSortTutorial.pdf) and [starter code](Homework/code_hw2.zip)
 * [Homework 3](Homework/hw3.pdf) and [starter code](Homework/code_hw3.zip)
+* [Homework 4](Homework/hw4.pdf) and [starter code](Homework/code_hw4.zip)
 
 ### Google Cloud Platform 
 * [Google Cloud Platform setup instructions](./gcp.html)
@@ -68,14 +74,14 @@ This class will give hands-on experience with programming multicore processors, 
 * [CUDA Programming Guides and References](http://docs.nvidia.com/cuda/index.html)
 * [CUDA C++ Programming Guide](http://docs.nvidia.com/cuda/pdf/CUDA_C_Programming_Guide.pdf)
 * [CUDA C++ Best Practices Guide](http://docs.nvidia.com/cuda/pdf/CUDA_C_Best_Practices_Guide.pdf)
+* [CUDA occupancy calculator](https://docs.nvidia.com/cuda/cuda-occupancy-calculator/CUDA_Occupancy_Calculator.xls)
 * [CUDA compiler driver NVCC](https://docs.nvidia.com/cuda/pdf/CUDA_Compiler_Driver_NVCC.pdf)
 * [OpenACC](https://www.openacc.org/)
 * [Compilers that support OpenACC](https://www.openacc.org/tools)
 * [OpenACC Specification (ver. 2.7 November 2018)](https://www.openacc.org/sites/default/files/inline-files/OpenACC.2.6.final.pdf)
 * [OpenACC Programming and Best Practices Guide](http://www.openacc.org/sites/default/files/OpenACC_Programming_Guide_0.pdf)
 * [OpenACC 2.7 API Reference Card](https://www.pgroup.com/lit/literature/openacc-api-guide-2.7.pdf)
-* [CUDA occupancy calculator](Reading/CUDA_Occupancy_Calculator.xls)
-* [Kepler GK110/210 whitepaper](Reading/NVIDIA_Kepler_GK110_GK210_Architecture_Whitepaper.pdf) (the K80 uses the GK210 chip)
+* [Kepler GK110/210 whitepaper](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/NVIDIA-Kepler-GK110-GK210-Architecture-Whitepaper.pdf) (the K80 uses the GK210 chip)
 * [Data sheet for Tesla GPUs](https://en.wikipedia.org/wiki/Nvidia_Tesla). **Tesla** is NVIDIA's brand name for their products targeting stream processing or general-purpose graphics processing units (GPGPU).
 * [K80 device info](k80.md)
 * [K80 data sheet](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-product-literature/TeslaK80-datasheet.pdf)
