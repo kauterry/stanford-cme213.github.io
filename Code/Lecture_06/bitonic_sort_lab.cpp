@@ -83,11 +83,12 @@ int main()
     // TODO
     for (int i = 2; i <= n; i <<= 1)
     {
-        for (int j = 0; j < n; j += i)
-        {
-            bool up = ((j / i) % 2 == 0);
-            BitonicSortSeq(j, i, seq, up);
-        }
+        #pragma omp parallel for
+            for (int j = 0; j < n; j += i)
+            {
+                bool up = ((j / i) % 2 == 0);
+                BitonicSortSeq(j, i, seq, up);
+            }
 
         LogInfo("Sort of length %d", i);
         PrintSequence(n, seq, i);

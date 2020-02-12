@@ -1,10 +1,10 @@
-# CPP := g++
-# CPPFLAGS := -std=c++11 -Wall -O2 -I/usr/local/include -Xpreprocessor -fopenmp -L/usr/local/lib -lomp
+CPP := g++
+CPPFLAGS := -std=c++11 -Wall -O2 -I/usr/local/include -Xpreprocessor -fopenmp -L/usr/local/lib -lomp
 # CPP := /usr/local/bin/g++-9
 # CPPFLAGS := -std=c++11 -Wall -O2 -fopenmp
 
-CPP := g++
-CPPFLAGS := -std=c++11 -Wall -O2 -fopenmp -DNDEBUG
+# CPP := g++
+# CPPFLAGS := -std=c++11 -Wall -O2 -fopenmp -DNDEBUG
 
 SRC := $(wildcard *.cpp)
 EXE := $(patsubst %.cpp,%,$(filter %.cpp,$(SRC)))
